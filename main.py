@@ -1,10 +1,16 @@
 import openpyxl as xl
 from openpyxl.chart import BarChart, Reference
 from openpyxl.chart.marker import DataPoint
+import random
 
-# cell = sheet['c4']
-# cell = sheet.cell(4, 3)
 
+def generate_slices_colors(num_slices):
+    # Generate random colors for slices
+    colors = ['#' + ''.join(random.choices('0123456789ABCDEF', k=6)) for _ in range(num_slices)]
+    slices = [DataPoint(idx=i) for i in range(num_slices)]
+    for i, slice_point in enumerate(slices):
+        slice_point.graphicalProperties.solidFill = colors[i]
+    return slices
 
 def process_workbook(filename):
     wb = xl.load_workbook(filename)
@@ -31,11 +37,10 @@ def process_workbook(filename):
     chart.add_data(values)
     sheet.add_chart(chart, 'e2')
 
-    slices = [DataPoint(idx=i) for i in range(3)]
-    sliceOne, sliceTwo, sliceThree = slices
-    sliceOne.graphicalProperties.solidFill = "02c212"
-    sliceTwo.graphicalProperties.solidFill = "d62b00"
-    sliceThree.graphicalProperties.solidFill = "f5ad31"
+    # Use the reusable function to generate slices with random colors
+
+    slices = generate_slices_colors(3)
+
     chart.series[0].data_points = slices
 
 
