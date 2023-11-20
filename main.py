@@ -39,7 +39,7 @@ def process_workbook(filename):
 
     # Use the reusable function to generate slices with random colors
 
-    slices = generate_slices_colors(3)
+    slices = generate_slices_colors(sheet.max_row)
 
     chart.series[0].data_points = slices
 
