@@ -1,16 +1,43 @@
-# This is a sample Python script.
+# import openpyxl as xl
+#
+# wb = xl.load_workbook('transactions.xlsx')
+#
+# sheet = wb['Sheet1']
+#
+# cell = sheet['c4']
+#
+# cell = sheet.cell(4, 3)
+#
+#
+# for row in range(2, sheet.max_row + 1):
+#     cell = sheet.cell(row, 3)
+#     corrected_price = cell.value * 0.9
+#     corrected_price_cell = sheet.cell(row, 4)
+#     corrected_price_cell.value = corrected_price
+#
+# corrected_price_cell_heading = sheet.cell(1, 4)
+# corrected_price_cell_heading.value = 'Corrected price'
+# print(corrected_price_cell_heading.value)
+#
+#
+# wb.save('transactions2.xlsx')
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import openpyxl as xl
 
+wb = xl.load_workbook('transactions.xlsx')
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+sheet = wb['Sheet1']
 
+for row in range(2, sheet.max_row + 1):
+    cell = sheet.cell(row, 3)
+    corrected_price = cell.value * 0.9
+    corrected_price_cell = sheet.cell(row, 4)
+    corrected_price_cell.value = corrected_price
+    print(corrected_price_cell.value)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('Luchi')
+corrected_price_cell_heading = sheet.cell(1, 4)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+corrected_price_cell_heading.value = 'corrected price'
+
+wb.save('transaction3.xlsx')
+
